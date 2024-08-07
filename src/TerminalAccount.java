@@ -1,5 +1,4 @@
 import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class TerminalAccount {
@@ -10,9 +9,18 @@ public class TerminalAccount {
 
     public void createAccount() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Por favor, insira o número da agência: ");
-        this.branch = sc.nextInt();
-        sc.nextLine();
+
+        boolean isBranchNumberInputCorrect = false;
+        do {
+            try {
+                System.out.print("Por favor, insira o número da agência: ");
+                this.branch = sc.nextInt();
+                sc.nextLine();
+                isBranchNumberInputCorrect = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, insira apenas números inteiros para o número da agência.");
+            }
+        } while (!isBranchNumberInputCorrect);
 
         System.out.print("Por favor, insira o número da conta: ");
         this.account = sc.nextLine();
